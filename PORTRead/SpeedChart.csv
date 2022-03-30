@@ -1,0 +1,10 @@
+static,20Mh,236079
+static,16Mh,188733
+global,20Mh,236079
+global,16Mh,188733
+
+currentMills to millis();,20 Mh,247882
+Printing less,20Mh,247934
+
+pygame.mouse.set_visible(False) # Hide cursor here
+
