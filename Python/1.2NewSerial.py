@@ -1,6 +1,6 @@
 import time
 import serial
-import sys
+import platform
 import os
 import pygame
 import threading
@@ -24,11 +24,26 @@ GREEN = [0,255,0]
 BLUE = [0,100,255]
 YELLOW = [220,220,50]
 
+white = (255, 255, 255)
+green = (0, 255, 0)
+blue = (0, 0, 128)
+backgroundColor = (20,20,20)
+
 #words
 WinNumbers = ["FIRST","SECOND","THIRD","FOURTH","FIFTH","SIXTH"]
 
 LaneW = ["ONE","TWO","THREE","FOUR","FIVE","SIX"]
 LaneColor = [RED,BLUE,YELLOW,GREEN,BLUE,GREEN]
+
+#Seraial Setup
+
+if(platform.system()=='Windows'):
+  PWDSERAL = "COM4"
+elif(platform.system()=='Linux'):
+  PWDSERAL = '/dev/ttyACM0'
+else:
+  print("But why?")
+  exit()
 
 # pygame setup
 
@@ -56,11 +71,6 @@ if(os.getlogin()=='pi'):
   X=pygame.display.Info().current_w
   Y=pygame.display.Info().current_h
   flags = pygame.FULLSCREEN | pygame.DOUBLEBUF
-
-white = (255, 255, 255)
-green = (0, 255, 0)
-blue = (0, 0, 128)
-backgroundColor = (0,0,200)
 
 
 startTime = 0
@@ -218,7 +228,7 @@ def ReadSerial(lock,mainTr):
   global TIME
 
   # serial setup
-  ser = serial.Serial('/dev/ttyACM0', 115200)
+  ser = serial.Serial(PWDSERAL, 115200)
   data = ser.readline().decode()
   timeFinal[6] = int("0x"+data.split(',')[0],16)
   print(data)
