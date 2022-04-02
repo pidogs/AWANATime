@@ -34,7 +34,7 @@ WinNumbers = ["FIRST","SECOND","THIRD","FOURTH","FIFTH","SIXTH"]
 WinColors = {"FIRST": [201, 176, 55],"SECOND":[215, 215, 215],"THIRD":[173, 138, 86],"FOURTH":[150,150,150],"FIFTH":[100,100,100],"SIXTH":[50,50,50],"":[0,0,0]}
 
 LaneW = ["ONE","TWO","THREE","FOUR","FIVE","SIX"]
-LaneColor = [RED,BLUE,YELLOW,GREEN,BLUE,GREEN]
+LaneColor = [RED,BLUE,GREEN,YELLOW,BLUE,GREEN]
 
 #Seraial Setup
 
@@ -48,7 +48,7 @@ else:
 
 # pygame setup
 
-lanes = 4
+lanes = 4 
 
 if(lanes<=4):
   lanOffset = 1
@@ -59,7 +59,7 @@ print(lanOffset)
 
 Y = 720
 X = Y*16//9
-FPSBool = True
+FPSBool = False
 FrameRate = 60
 Border = 5
 
