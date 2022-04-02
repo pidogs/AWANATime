@@ -3,6 +3,15 @@ import serial
 import sys
 import os
 import numpy
+import platform
+
+if(platform.system()=='Windows'):
+  PWDSERAL = "COM4"
+elif(platform.system()=='Linux'):
+  PWDSERAL = '/dev/ttyACM0'
+else:
+  print("But why?")
+  exit()
 
 lanes = 6
 
@@ -27,7 +36,7 @@ def get_digit(number, n):
     return number // 10**n % 10
 
 # serial setup
-ser = serial.Serial('/dev/ttyACM0', 115200)
+ser = serial.Serial(PWDSERAL, 115200)
 data = ser.readline().decode()
 print(data)
 while 1:
