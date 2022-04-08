@@ -6,13 +6,6 @@ import pygame
 import threading
 from pygame.locals import *
 
-#rs485 arduino to arduino
-#https://create.arduino.cc/projecthub/maurizfa-13216008-arthur-jogy-13216037-agha-maretha-13216095/modbus-rs-485-using-arduino-c055b5
-
-#arduino to raspberry pi gpio serial
-#https://roboticsbackend.com/raspberry-pi-arduino-serial-communication/
-
-#raspberry pi serial on gpio https://pimylifeup.com/raspberry-pi-serial/
 
 print("start")
 ColumOneText = "Lane Number"
@@ -89,6 +82,7 @@ POSITION=["","","","","",""]
 
 start = int(time.time()*1000)
 
+#run if the display updates
 def UIsetup(Background,extralanes,fontMed,x,y):
   Background.fill(backgroundColor)
   Tital = pygame.font.Font(os.path.join('LiberationMono-Regular.ttf'),int(60*y/720))
@@ -150,6 +144,7 @@ def UIsetup(Background,extralanes,fontMed,x,y):
   pygame.Surface.convert(Background)
   return RightSideStart
 
+#pygame loop
 def mainLoop(lock):
   done = 0
   preInTime = 0
@@ -232,6 +227,7 @@ def mainLoop(lock):
     pygame.display.flip()
     clock.tick_busy_loop(FrameRate)
 
+#serail reading and calculating.
 def ReadSerial(lock,mainTr):
   #varis
   binaryLane=0
@@ -287,11 +283,9 @@ def ReadSerial(lock,mainTr):
       positionLocal = ["","","","","",""]
       print(f'{inTime : 010d} | {binaryLane} | {timeFinal} | {timeStop} | {positionLocal}')
       print("START!!!-")
+      start = int(time.time()*1000)
     # elif((binaryLane[1]=="1") and (binaryLane[1]!=prehall) and (inTime-timeFinal[6] >= HallTimeThr)):
-
-
-      
-      print("START!!!2")
+      #print("START!!!2")
     for i in range(lanOffset,lanes+lanOffset):
       if(timeStop[i]!=0 and positionLocal[i]==""):
         positionLocal[i] = WinNumbers[sum(timeStop)-1]
